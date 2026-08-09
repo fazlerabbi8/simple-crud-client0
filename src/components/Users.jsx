@@ -1,7 +1,9 @@
+import { useState } from "react";
 import { useLoaderData } from "react-router";
 
 const Users = () => {
   const users = useLoaderData();
+  const [remainigUsers, setReamainingUsers] = useState(users);
 
   const handleDelete = (_id) => {
     console.log("delete", _id);
@@ -11,9 +13,11 @@ const Users = () => {
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log(data)
-        if(data.deletedCount > 0){
-            alert("user deleted successfully");
+        console.log(data);
+        if (data.deletedCount > 0) {
+          alert("user deleted successfully");
+          const remaining = remainigUsers.filter((user) => user._id !== _id);
+          setReamainingUsers(remaining);
         }
       })
       .catch((error) => console.log(error));
@@ -24,7 +28,7 @@ const Users = () => {
       <h2>Users: {users.length}</h2>
 
       <div className="mt-4 ml-20 space-y-4">
-        {users.map((user) => (
+        {remainigUsers.map((user) => (
           <div key={user._id} className="border border-amber-700">
             <p>{user.name}</p>
             <p>{user.email}</p>
