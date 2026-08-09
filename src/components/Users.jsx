@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useLoaderData } from "react-router";
+import { Link, useLoaderData } from "react-router";
 
 const Users = () => {
   const users = useLoaderData();
@@ -39,6 +39,9 @@ const Users = () => {
             >
               Delete
             </button>
+            <Link to={`/update/${user._id}`}>
+              <button>Update</button>
+            </Link>
           </div>
         ))}
       </div>
