@@ -1,3 +1,5 @@
+import Users from "./components/Users";
+
 function App() {
   const handleAddUser = (e) => {
     e.preventDefault();
@@ -16,7 +18,10 @@ function App() {
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
+        if(data.insertedId){
+          alert("user added successfully")
+        }
+        form.reset();
       });
   };
   return (
